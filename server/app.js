@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const path = require("path");
 const app = express();
 
 //logging
@@ -9,7 +10,12 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //api routes
-app.use("/api", require("/api"));
+app.use("/api", require("./api"));
+app.use("/auth", require("./auth"));
+
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "public/index.html"))
+);
 
 //static file serving
 app.use(express.static(path.join(__dirname, "..", "public")));
