@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 //error handling extensions
 app.use((req, res, next) => {
-  if (this.path.extname(req.path).length) {
+  if (path.extname(req.path).length) {
     const error = new Error("Not found");
     error.status = 404;
     next(error);

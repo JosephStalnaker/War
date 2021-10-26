@@ -3,7 +3,7 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const SALT = 4;
+const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
   username: {
@@ -12,14 +12,6 @@ const User = db.define("user", {
     allowNull: false,
   },
   password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  lastName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -33,25 +25,29 @@ const User = db.define("user", {
   },
 });
 
-//methods for instance
-//compare non encrypted to encrypted password
-User.prototype.correctPassword = function (submitedPassword) {
-  return bcrpt.compare(submitedPassword, this.password);
+/**
+ * instanceMethods
+ */
+User.prototype.correctPassword = function (candidatePwd) {
+  //we need to compare the plain version to an encrypted version of the password
+  return bcrypt.compare(candidatePwd, this.password);
 };
 
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
-//Class methods
+/**
+ * classMethods
+ */
 User.authenticate = async function ({ username, password }) {
   const user = await this.findOne({ where: { username } });
   if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect username or password");
+    const error = Error("Incorrect username/password");
     error.status = 401;
     throw error;
   }
-  return user.generateToken;
+  return user.generateToken();
 };
 
 User.findByToken = async function (token) {
@@ -59,24 +55,28 @@ User.findByToken = async function (token) {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
     if (!user) {
-      throw "not user";
+      throw "nooo";
     }
+    return user;
   } catch (ex) {
-    const error = Error("wrong token");
+    const error = Error("bad token");
     error.status = 401;
     throw error;
   }
 };
 
-//Hook
-const passwordHash = async (user) => {
+/**
+ * hooks
+ */
+const hashPassword = async (user) => {
+  //in case the password has been changed, we want to encrypt it with bcrypt
   if (user.changed("password")) {
-    user.password = await bcrypt.hash(user.password, SALT);
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 };
 
-User.beforeCreate(passwordHash);
-User.beforeUpdate(passwordHash);
-User.beforeBulkCreate((users) => Promise.all(users.map(passwordHash)));
+User.beforeCreate(hashPassword);
+User.beforeUpdate(hashPassword);
+User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
 
 module.exports = User;

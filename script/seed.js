@@ -12,16 +12,12 @@ async function seedDatabase() {
     User.create({
       username: "joseph",
       password: "password",
-      firstName: "Joseph",
-      lastName: "Stalnaker",
       wins: 7,
       losses: 3,
     }),
     User.create({
       username: "silvia",
       password: "password1",
-      firstName: "Silvia",
-      lastName: "Miranda",
       wins: 4,
       losses: 6,
     }),
