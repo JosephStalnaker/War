@@ -4,24 +4,31 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 
 const Nav = ({ handleClick, isLoggedIn }) => (
-  <div>
+  <div className="nav-container">
     <h1>WAR</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+        <div className="nav-controls">
+          <div className="nav-links">
+            <Link to="/home">Home</Link>
+          </div>
+          <div className="nav-links">
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
         </div>
       ) : (
-        <div>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+        <div className="nav-controls">
+          <div className="nav-links">
+            <Link to="/login">Login</Link>
+          </div>
+          <div className="nav-links">
+            <Link to="/signup">Sign Up</Link>
+          </div>
         </div>
       )}
     </nav>
-    <hr />
   </div>
 );
 

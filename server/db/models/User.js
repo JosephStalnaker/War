@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
-const jwt = require("jsonwebtoken");
+const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
@@ -34,7 +34,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.prototype.generateToken = function () {
-  return jwt.sign({ id: this.id }, process.env.JWT);
+  return JWT.sign({ id: this.id }, process.env.JWT);
 };
 
 /**
@@ -52,7 +52,7 @@ User.authenticate = async function ({ username, password }) {
 
 User.findByToken = async function (token) {
   try {
-    const { id } = await jwt.verify(token, process.env.JWT);
+    const { id } = await JWT.verify(token, process.env.JWT);
     const user = User.findByPk(id);
     if (!user) {
       throw "nooo";

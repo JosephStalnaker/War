@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/Auth";
 import Home from "./components/Home";
 import { me } from "./store";
+import Table from "./components/Table";
 
 class Routes extends Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class Routes extends Component {
         {loggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path="/table" component={Table} />
             <Redirect to="/home" />
           </Switch>
         ) : (
