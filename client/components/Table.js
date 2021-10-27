@@ -18,14 +18,7 @@ const Table = () => {
           </div>
         </div>
         <div className="wells">
-          <div className="decks-container">
-            <Deck />
-          </div>
-        </div>
-        <div className="deal-button-container">
-          <div>
-            <button type="submit">Deal</button>
-          </div>
+          <Deck />
         </div>
       </div>
     </div>

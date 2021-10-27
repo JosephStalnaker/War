@@ -176,11 +176,11 @@ const Battle = (props) => {
           <div>Deck Count {playerDeck.length}</div>
           <div>Temp Deck Count {playerTempDeck.length}</div>
         </div>
-        <div>
-          <button onClick={handleBattleClick} type="submit">
-            Battle
-          </button>
-        </div>
+      </div>
+      <div className="deal-button-container">
+        <button onClick={handleBattleClick} type="submit">
+          Battle
+        </button>
       </div>
     </>
   );

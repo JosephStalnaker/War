@@ -1,7 +1,10 @@
 # WAR GAME by Joseph Stalnaker
 
 - Play the game of War
-- Sign up and create a user profile with your first name, last name, username and email address
+- Create a database called
+- In the terminal run 'npm run seed' to populate test profiles
+- Begin running the app by running 'npm run start:dev' in the terminal
+- Sign up and create a user profile with your username and password
 - Once signed up play the computer by pressing deal
 - The game is over when either player no longer has cards to play
-- As a user check score history to see how many games you have won all time displayed in a comparative pie chart
+- As a user check score history to see how many games you have won all time
