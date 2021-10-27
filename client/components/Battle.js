@@ -161,7 +161,7 @@ const Battle = (props) => {
         <div className="battle-computer">
           <div>
             {deckOfCards[computerCard]
-              ? deckOfCards[computerCard][2]
+              ? `Card numeric value ${deckOfCards[computerCard][2]}`
               : "there's nothing here"}
           </div>
           <div>Comp Deck Count {computerDeck.length}</div>
@@ -170,7 +170,7 @@ const Battle = (props) => {
         <div className="battle-player">
           <div>
             {deckOfCards[playerCard]
-              ? deckOfCards[playerCard][2]
+              ? `Card numeric value ${deckOfCards[playerCard][2]}`
               : "there's nothing here"}
           </div>
           <div>Deck Count {playerDeck.length}</div>
