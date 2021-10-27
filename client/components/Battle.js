@@ -77,92 +77,78 @@ const Battle = (props) => {
 
     if (props.computerDeck.length && props.playerDeck.length) {
       if (deckOfCards[computerCard][2] > deckOfCards[playerCard][2]) {
-        setComputerTempDeck([...computerTempDeck, computerCard]);
-        setComputerTempDeck([...computerTempDeck, playerCard]);
-        props.computerDeck.pop();
-        props.playerDeck.pop();
+        setComputerTempDeck([...computerTempDeck, computerCard, playerCard]);
+        computerDeck.pop();
+        playerDeck.pop();
       }
       if (deckOfCards[playerCard][2] > deckOfCards[computerCard][2]) {
-        setPlayerTempDeck([...playerTempDeck, playerCard]);
-        setPlayerTempDeck([...playerTempDeck, computerCard]);
-        props.computerDeck.pop();
-        props.playerDeck.pop();
+        setPlayerTempDeck([...playerTempDeck, playerCard, computerCard]);
+        computerDeck.pop();
+        playerDeck.pop();
       }
-      if (props.computerDeck.length === 0) {
+      if (computerDeck.length === 0) {
         setComputerDeck([computerDeck, ...computerTempDeck]);
         setComputerTempDeck([]);
       }
-      if (props.playerDeck.length === 0) {
+      if (playerDeck.length === 0) {
         setPlayerDeck([playerDeck, ...playerTempDeck]);
         setPlayerTempDeck([]);
       }
       if (
         deckOfCards[playerCard][2] === deckOfCards[computerCard][2] &&
-        props.computerDeck.length >= 4 &&
-        props.playerDeck.length >= 4
+        computerDeck.length >= 4 &&
+        playerDeck.length >= 4
       ) {
         setComputerWarDeck(
           ...computerWarDeck,
-          props.computerDeck.slice(
-            props.computerDeck.length - 4,
-            props.computerDeck.length
-          )
+          computerDeck.slice(computerDeck.length - 4, computerDeck.length)
         );
         setPlayerWarDeck([
           ...playerWarDeck,
-          props.playerDeck.slice(
-            props.playerDeck.length - 4,
-            props.playerDeck.length
-          ),
+          playerDeck.slice(playerDeck.length - 4, playerDeck.length),
         ]);
         setComputerWarDeck([]);
         setPlayerWarDeck([]);
       }
       if (
         deckOfCards[playerCard][2] === deckOfCards[computerCard][2] &&
-        props.computerDeck.length < 4 &&
-        props.playerDeck.length >= 4
+        computerDeck.length < 4 &&
+        playerDeck.length >= 4
       ) {
         setComputerWarDeck(
           ...computerWarDeck,
-          props.computerDeck.slice(0, props.computerDeck.length)
+          computerDeck.slice(0, computerDeck.length)
         );
         setPlayerWarDeck([
           ...playerWarDeck,
-          props.playerDeck.slice(
-            props.playerDeck.length - 4,
-            props.playerDeck.length
-          ),
+          playerDeck.slice(playerDeck.length - 4, playerDeck.length),
         ]);
         setComputerWarDeck([]);
         setPlayerWarDeck([]);
       }
       if (
         deckOfCards[playerCard][2] === deckOfCards[computerCard][2] &&
-        props.computerDeck.length >= 4 &&
-        props.playerDeck.length < 4
+        computerDeck.length >= 4 &&
+        playerDeck.length < 4
       ) {
         setComputerWarDeck(
           ...computerWarDeck,
-          props.computerDeck.slice(
-            props.computerDeck.length - 4,
-            props.computerDeck.length
-          )
+          computerDeck.slice(computerDeck.length - 4, computerDeck.length)
         );
         setPlayerWarDeck([
           ...playerWarDeck,
-          props.playerDeck.slice(0, props.playerDeck.length),
+          playerDeck.slice(0, playerDeck.length),
         ]);
         setComputerWarDeck([]);
         setPlayerWarDeck([]);
       }
       //if the main array is empty and the holding is full reverse teh action and repeat until both
       //if both array links are 0 then teh game is over then populate the component of the winner and update the scores in the database
-      console.log("comp", props.computerDeck, computerTempDeck);
-      console.log("player", props.playerDeck, playerTempDeck);
-    } else if (!props.computerDeck.length && computerTempDeck.length) {
+      console.log("comp", computerDeck, computerTempDeck);
+      console.log("player", playerDeck, playerTempDeck);
+    } else if (!computerDeck.length && computerTempDeck.length) {
       console.log("Player Wins");
-    } else if (!props.playerDeck.length && playerTempDeck.length) {
+    } else if (!playerDeck.length && playerTempDeck.length) {
       console.log("Computer Wins");
     }
   };
@@ -178,6 +164,8 @@ const Battle = (props) => {
               ? deckOfCards[computerCard][2]
               : "there's nothing here"}
           </div>
+          <div>Comp Deck Count {computerDeck.length}</div>
+          <div>Comp Temp Deck Count {computerTempDeck.length}</div>
         </div>
         <div className="battle-player">
           <div>
@@ -185,6 +173,8 @@ const Battle = (props) => {
               ? deckOfCards[playerCard][2]
               : "there's nothing here"}
           </div>
+          <div>Deck Count {playerDeck.length}</div>
+          <div>Temp Deck Count {playerTempDeck.length}</div>
         </div>
         <div>
           <button onClick={handleBattleClick} type="submit">
