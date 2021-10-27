@@ -1,9 +1,7 @@
 body {
   font-family: century-gothic, Century Gothic, CenturyGothic, AppleGothic;
-}
-
-a {
-  text-decoration: none;
+  padding: 0;
+  margin: 0;
 }
 
 h1 {
@@ -21,17 +19,21 @@ form div {
   display: inline-block;
 }
 
+.greeting {
+  text-align: center;
+}
+
 .nav-container {
-  background-color: aqua;
+  padding: 10px;
+  background-color: rgb(150, 150, 150);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 100px;
+  height: 75px;
 }
 
 .nav-controls {
-  background-color: blueviolet;
   width: 200px;
   display: flex;
   flex-direction: row;
@@ -40,14 +42,12 @@ form div {
 }
 
 .auth-form {
-  background-color: chartreuse;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .table {
-  background-color: crimson;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -55,14 +55,12 @@ form div {
 }
 
 .players-well-container {
-  background-color: orange;
   height: 400px;
   display: flex;
   flex-direction: column;
 }
 
 .well-labels-container {
-  background-color: orchid;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -72,7 +70,6 @@ form div {
 }
 
 .well-labels {
-  background-color: purple;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -82,7 +79,6 @@ form div {
 }
 
 .wells {
-  background-color: royalblue;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -91,7 +87,6 @@ form div {
 }
 
 .decks-container {
-  background-color: yellow;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -100,14 +95,13 @@ form div {
 }
 
 .deck {
-  background-color: green;
-  outline: 2px solid black;
+  outline: 2px solid rgb(199, 199, 199);
+  border-radius: 5px;
   width: 280px;
   height: 370px;
 }
 
 .deal-button-container {
-  background-color: pink;
   display: flex;
   justify-content: center;
   align-items: center;

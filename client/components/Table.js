@@ -1,4 +1,9 @@
 import React from "react";
+import Deck from "./Deck";
+
+//need to import Deck into the div decks
+//create hooks of the state and store
+//need to establish the state of the deck of cards
 
 const Table = () => {
   return (
@@ -14,10 +19,7 @@ const Table = () => {
         </div>
         <div className="wells">
           <div className="decks-container">
-            <div className="deck"></div>
-            <div className="deck"></div>
-            <div className="deck"></div>
-            <div className="deck"></div>
+            <Deck />
           </div>
         </div>
         <div className="deal-button-container">
